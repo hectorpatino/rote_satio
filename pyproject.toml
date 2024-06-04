@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rote_satio"
-version = "0.1.0"
+version = "0.0.1beta"
 description = "A package with utils for ml for remote sensing"
 authors = ["Hector Patino"]
 license = "MIT"
@@ -40,14 +40,15 @@ optuna-dashboard = "0.15.1"
 ruff = "0.4.7"
 mkdocs-glightbox = "^0.4.0"
 mkdocs-jupyter = "^0.24.7"
+python-semantic-release = "^9.8.1"
 
 [tool.semantic_release]
 version_toml = [
     "pyproject.toml:tool.poetry.version",
-]                                                    # version location
-branch = "main"                                      # branch to make releases of
-changelog_file = "CHANGELOG.md"                      # changelog file
-build_command = "pip install poetry && poetry build" # build dists 
+]                                                     # version location
+branch = "main"                                       # branch to make releases of
+changelog_file = "CHANGELOG.md"                       # changelog file
+build_command = "pip install poetry && poetry build"  # build dis
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
