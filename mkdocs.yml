@@ -1,0 +1,19 @@
+site_name: AutoSegmentation
+
+nav:
+  - Home: index.md
+  - API: api/module.md
+  - Examples: examples/segmentation.ipynb
+
+theme:
+  name: "material"
+  palette:
+    primary: "blue"
+    accent: "light-blue"
+
+plugins: { mkdocstrings, glightbox, mkdocs-jupyter }
+
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
