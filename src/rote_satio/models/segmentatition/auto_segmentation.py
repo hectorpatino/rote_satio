@@ -40,19 +40,13 @@ class AutoSegmentation():
 
 
     def predict(self):
-
         self._read_image()
-        print('generating indexes')
         self._generate_indexes()
         if self.generate_objects:
-            print('generating segments')
             self._generete_segments()
         df = parse_to_pandas(self.image)
-        pd.DataFrame(data=df.columns).to_csv('columns_2.csv')
         pipeline = PlanetPipeline()
-        print('fitting pipeline')
         labels = pipeline.predict(df)
-        print('converting to xarray')
         return self._convert_to_xarray(labels)
 
 
