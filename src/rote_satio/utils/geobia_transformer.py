@@ -33,7 +33,7 @@ class SegmentsTransformer(BaseEstimator, TransformerMixin):
                         X.sel(band=band).data,
                         kernel_size=self.kernel_size,
                         convert2lab=False,
-                        max_dist=2,
+                        max_dist=1,
                         ratio=1.0
                     )
                     zonal_segments = scipy.ndimage.mean(
