@@ -1,12 +1,19 @@
 import os
+from typing import Tuple
 
 import numpy as np
 import pandas as pd
 import scipy
 import xarray as xr
 import rioxarray
+from kneed import KneeLocator
+from sklearn.cluster import KMeans
+from sklearn.pipeline import Pipeline
+from feature_engine.discretisation import EqualWidthDiscretiser
+from feature_engine.wrappers import SklearnTransformerWrapper
 
 from skimage.segmentation import quickshift
+from sklearn.preprocessing import MinMaxScaler, RobustScaler
 
 from rote_satio.models.segmentatition.planet.dispatcher import PlanetPipeline
 from rote_satio.utils.geobia_transformer import SegmentsTransformer
@@ -50,6 +57,40 @@ class AutoSegmentation():
         return self._convert_to_xarray(labels)
 
 
+    def train(self, values: Tuple[int, int] = (5, 50)):
+        self._read_image()
+        self._generate_indexes()
+        if self.generate_objects:
+            self._generete_segments()
+        df = parse_to_pandas(self.image)
+        number_clusters = np.arange(values[0], values[1])
+        pipeline = Pipeline([
+            ('scaler', SklearnTransformerWrapper(transformer=MinMaxScaler())),
+            ('robust_scaler', SklearnTransformerWrapper(transformer=RobustScaler())),
+            ('scaler_2', SklearnTransformerWrapper(transformer=MinMaxScaler())),
+            ('discretizer', EqualWidthDiscretiser(bins=10)),
+            ('scaler_3', SklearnTransformerWrapper(transformer=MinMaxScaler())),
+        ])
+        df = pipeline.fit_transform(df)
+
+        inertia_list = []
+
+        for num_clust in number_clusters:
+            kmeans = KMeans(n_clusters=num_clust, random_state=42, max_iter=1000, init='k-means++')
+            kmeans.fit(df)
+            inertia_list.append(kmeans.inertia_)
+        kneedle = KneeLocator(
+            number_clusters,
+            inertia_list,
+            curve='convex',
+            direction='decreasing'
+        )
+        best_k = kneedle.elbow
+        kmeans = KMeans(n_clusters=best_k, random_state=42, max_iter=1000, init='k-means++')
+        kmeans.fit(df)
+        labels = kmeans.predict(df)
+        return self._convert_to_xarray(labels)
+
 
     def _convert_to_xarray(self, labels):
         labels = labels.reshape(self.image.shape[1], self.image.shape[2])
@@ -57,8 +98,9 @@ class AutoSegmentation():
             labels,
             kernel_size=1,
             convert2lab=False,
-            max_dist=1,
+            max_dist=2,
             ratio=1.0
+
         )
         labels = scipy.ndimage.median(
             input=labels,
