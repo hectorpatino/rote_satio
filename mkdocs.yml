@@ -8,6 +8,9 @@ nav:
       - Segmentation:
           - Custom: examples/kmeans.ipynb
           - Pretrained: examples/segmentation.ipynb
+  - Utils:
+      - geobia: utils/geobia.md
+      - spyndex: utils/spyndex.md
 
 theme:
   name: "material"

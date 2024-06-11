@@ -444,6 +444,90 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/geobia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    geobia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/spyndex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    spyndex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -759,8 +843,8 @@
 <span class="sd">            generate_objects: If True, there will be generation of geobias objects.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            AutoSegmentation: And AutoSegmentation object with the given image_path and image_program</span>
-<span class="sd">            that can be used to perform segmentation on the image.</span>
+<span class="sd">            self (AutoSegmentation): And AutoSegmentation object with the given image_path and image_program</span>
+<span class="sd">                that can be used to perform segmentation on the image.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">image_program</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_path</span> <span class="o">=</span> <span class="n">image_path</span>
@@ -795,7 +879,7 @@
 <span class="sd">            values: A tuple with the range of number of clusters to test.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            xr.DataArray: DataArray of the predicted labels.</span>
+<span class="sd">            self (AutoSegmentation): DataArray of the predicted labels.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_image</span><span class="p">()</span>
@@ -1013,20 +1097,13 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-<td><code>AutoSegmentation</code></td>            <td>
+<td><code>self</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="src.rote_satio.models.segmentatition.auto_segmentation.AutoSegmentation" href="#src.rote_satio.models.segmentatition.auto_segmentation.AutoSegmentation">AutoSegmentation</a></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>And AutoSegmentation object with the given image_path and image_program</p>
-              </div>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-<td></td>            <td>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>that can be used to perform segmentation on the image.</p>
+                <p>And AutoSegmentation object with the given image_path and image_program
+that can be used to perform segmentation on the image.</p>
               </div>
             </td>
           </tr>
@@ -1069,8 +1146,8 @@
 <span class="sd">        generate_objects: If True, there will be generation of geobias objects.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        AutoSegmentation: And AutoSegmentation object with the given image_path and image_program</span>
-<span class="sd">        that can be used to perform segmentation on the image.</span>
+<span class="sd">        self (AutoSegmentation): And AutoSegmentation object with the given image_path and image_program</span>
+<span class="sd">            that can be used to perform segmentation on the image.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">image_program</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">image_path</span> <span class="o">=</span> <span class="n">image_path</span>
@@ -1157,17 +1234,18 @@ Args:
     <table>
       <thead>
         <tr>
-          <th>Type</th>
+<th>Name</th>          <th>Type</th>
           <th>Description</th>
         </tr>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td>
+<td><code>self</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="src.rote_satio.models.segmentatition.auto_segmentation.AutoSegmentation" href="#src.rote_satio.models.segmentatition.auto_segmentation.AutoSegmentation">AutoSegmentation</a></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>xr.DataArray: DataArray of the predicted labels.</p>
+                <p>DataArray of the predicted labels.</p>
               </div>
             </td>
           </tr>
@@ -1226,7 +1304,7 @@ Args:
 <span class="sd">        values: A tuple with the range of number of clusters to test.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        xr.DataArray: DataArray of the predicted labels.</span>
+<span class="sd">        self (AutoSegmentation): DataArray of the predicted labels.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_read_image</span><span class="p">()</span>
