@@ -35,8 +35,8 @@ class AutoSegmentation():
             generate_objects: If True, there will be generation of geobias objects.
 
         Returns:
-            AutoSegmentation: And AutoSegmentation object with the given image_path and image_program
-            that can be used to perform segmentation on the image.
+            self (AutoSegmentation): And AutoSegmentation object with the given image_path and image_program
+                that can be used to perform segmentation on the image.
         """
         self._check_input(image_path, image_program)
         self.image_path = image_path
@@ -71,7 +71,7 @@ class AutoSegmentation():
             values: A tuple with the range of number of clusters to test.
 
         Returns:
-            xr.DataArray: DataArray of the predicted labels.
+            self (AutoSegmentation): DataArray of the predicted labels.
 
         """
         self._read_image()
