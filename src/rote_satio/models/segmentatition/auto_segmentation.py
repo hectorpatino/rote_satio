@@ -2,7 +2,7 @@ import os
 from typing import Tuple
 
 import numpy as np
-import pandas as pd
+
 import scipy
 import xarray as xr
 import rioxarray
