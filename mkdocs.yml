@@ -1,9 +1,13 @@
-site_name: AutoSegmentation
+site_name: rote-satio
 
 nav:
   - Home: index.md
+  - Installation: installation.md
   - API: api/module.md
-  - Examples: examples/segmentation.ipynb
+  - Examples:
+      - Segmentation:
+          - Custom: examples/kmeans.ipynb
+          - Pretrained: examples/segmentation.ipynb
 
 theme:
   name: "material"

@@ -47,6 +47,12 @@ class AutoSegmentation():
 
 
     def predict(self):
+        """
+        Predicts the segmentation of the image. Using a pre-trained model.
+        Returns:
+            xr.DataArray: DataArray of the predicted labels.
+
+        """
         self._read_image()
         self._generate_indexes()
         if self.generate_objects:
@@ -58,6 +64,16 @@ class AutoSegmentation():
 
 
     def train(self, values: Tuple[int, int] = (5, 50)):
+        """
+        Trains a models to segment the image. It uses kmeans to segment the image and uses
+        the elbow method to find the best number of clusters.
+        Args:
+            values: A tuple with the range of number of clusters to test.
+
+        Returns:
+            xr.DataArray: DataArray of the predicted labels.
+
+        """
         self._read_image()
         self._generate_indexes()
         if self.generate_objects:
