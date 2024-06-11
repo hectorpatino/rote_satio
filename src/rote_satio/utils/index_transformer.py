@@ -11,16 +11,24 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
             program: str = 'Planet',
             ):
         """
+        This is a `spyndex` wrapper to automate the computation of multiple spectral indexes.
+        It is heavily based on the `spyndex` package, which is a Python package for the computation of spectral indices
+        for more information please visit [spyndex](https://spyndex.readthedocs.io/en/latest/):
+
         Args:
-            program: Program of the sensor of the image.
+            program: Program of the sensor of the image. Until 0.0.2beta version only 'Planet' is supported.
 
         """
         self.program = program
         self.indexes = self.get_indexes()
 
-
-
     def get_indexes(self):
+        """
+        It returns the indexes supported by the program of the program being used by `spyndex
+        Returns:
+            List of indexes supported by the program.
+
+        """
         if self.program not in ["Planet"]:
             raise ValueError(f"Invalid image program {self.program}. Supported programs are ['Planet']")
         # skiped indexes due to errors.
@@ -39,10 +47,13 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
 
         return [index for index in self.indexes if index not in skip_indexes]
 
-    def transform(self, X):
+    def transform(self, X: xr.DataArray) -> xr.DataArray:
         """
+        It computes the indexes for the input data.
         Args:
             X: Input data.
+        Returns
+            xr.DataArray: A new DataArray with the indexes computed.
         """
         self._get_params(X)
 
@@ -59,12 +70,24 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         return idx
 
 
-
     def _get_bands_names(self):
+        """
+        This function returns the band names for the program being used. Until 0.0.2beta version only 'Planet' is supported.
+        Returns:
+
+        """
         if self.program == 'Planet':
             return ['B1', 'B2', 'B3', 'B4']
 
-    def _get_params(self, X):
+    def _get_params(self, X: xr.DataArray) -> None:
+        """
+        Some indexes require parameters to be computed. This function sets the parameters for the indexes.
+        Args:
+            X: An xarray DataArray with the bands of the image.
+
+        Returns:
+            None
+        """
         self.params = {
             "gamma": constants.gamma.value,
             "sla": constants.sla.value,

@@ -1,17 +1,10 @@
 # Welcome to MkDocs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to `rote_satio`'s documentation! This documentation is built using [MkDocs](https://www.mkdocs.org/), 
+a static site generator that's geared towards project documentation.
 
-## Commands
+This simple package (for now) is a collection of tools and models for the analysis of satellite imagery.
+The main idea of the package is to work with seamlessly with `xarray`, `scikit-learn`, and `spyndex` and `feature-engine`
+for the analysis of satellite imagery.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Please notice that `rote_satio` is still in its early stages of development, so expect some bugs and changes in the API.

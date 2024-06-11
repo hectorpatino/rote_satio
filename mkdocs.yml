@@ -1,9 +1,16 @@
-site_name: AutoSegmentation
+site_name: rote-satio
 
 nav:
   - Home: index.md
+  - Installation: installation.md
   - API: api/module.md
-  - Examples: examples/segmentation.ipynb
+  - Examples:
+      - Segmentation:
+          - Custom: examples/kmeans.ipynb
+          - Pretrained: examples/segmentation.ipynb
+  - Utils:
+      - geobia: utils/geobia.md
+      - spyndex: utils/spyndex.md
 
 theme:
   name: "material"

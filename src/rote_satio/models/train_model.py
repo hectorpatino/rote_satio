@@ -31,10 +31,10 @@ def load_data(
     """
     # current file location
     current_file = Path(os.getcwd())
-    root_folder = current_file.parents[2]
+    # root_folder = current_file.parents[2]
 
     # access the data folder and list the files
-    data_folder_path = root_folder / data_folder
+    data_folder_path = current_file / data_folder
 
 
 
@@ -117,3 +117,4 @@ def train_model(
 
 if __name__ == "__main__":
     app()
+
