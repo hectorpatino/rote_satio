@@ -5,8 +5,10 @@ import warnings
 import xarray as xr
 import scipy
 
+from rote_satio.utils.base_transformer import BaseIOTransformer
 
-class SegmentsTransformer(BaseEstimator, TransformerMixin):
+
+class SegmentsTransformer(BaseIOTransformer):
     def __init__(
             self,
             kernel_size: int = 1,
@@ -22,6 +24,7 @@ class SegmentsTransformer(BaseEstimator, TransformerMixin):
         Returns:
             xarray.DataArray: A new DataArray with the zonal segments computed.
         """
+        super().__init__()
         self.kernel_size = kernel_size
 
     def fit(self, X: xr.DataArray, y=None):
@@ -40,6 +43,8 @@ class SegmentsTransformer(BaseEstimator, TransformerMixin):
         Returns:
 
         """
+        self._check_input(X)
+
         for band in X.band.values:
 
             try:

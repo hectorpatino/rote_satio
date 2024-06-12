@@ -1,13 +1,15 @@
 import warnings
 
 import numpy as np
-from sklearn.base import BaseEstimator, TransformerMixin
+
 from spyndex import spyndex
 from spyndex import constants
 import xarray as xr
 
+from rote_satio.utils.base_transformer import BaseIOTransformer
 
-class IndexTransformer(BaseEstimator, TransformerMixin):
+
+class IndexTransformer(BaseIOTransformer):
     def __init__(
             self,
             program: str = 'Planet',
@@ -25,9 +27,6 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         self.indexes = self.get_indexes()
         self.__check_program()
 
-    def __check_input(self, X):
-        if not isinstance(X, xr.DataArray):
-            raise TypeError(f"Input data must be a xarray DataArray. Got {type(X)} instead.")
     def __check_program(self):
         programs = ["Planet", "Landsat-TM", "MODIS", "Sentinel-2", "Landsat-ETM+", "Landsat-OLI"]
         if self.program not in programs:
@@ -177,7 +176,7 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         Returns
             xr.DataArray: A new DataArray with the indexes computed.
         """
-        self.__check_input(X)
+        self._check_input(X)
         self._get_params(X)
 
         idx = spyndex.computeIndex(
