@@ -44,11 +44,6 @@ class PlanetPipeline(Pipeline):
 
     def fit(self, X, y=None, **params):
         preprocessing_pipeline = self._preprocessing_pipeline()
-        # save columns names to csv
-        pd.DataFrame(data = X.columns).to_csv(self.current_file.joinpath('columns.csv'))
-
-
-
         preprocessing_pipeline.fit(X)
         preprocessed = preprocessing_pipeline.transform(X)
 
