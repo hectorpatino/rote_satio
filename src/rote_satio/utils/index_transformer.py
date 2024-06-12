@@ -25,6 +25,9 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         self.indexes = self.get_indexes()
         self.__check_program()
 
+    def __check_input(self, X):
+        if not isinstance(X, xr.DataArray):
+            raise TypeError(f"Input data must be a xarray DataArray. Got {type(X)} instead.")
     def __check_program(self):
         programs = ["Planet", "Landsat-TM", "MODIS", "Sentinel-2", "Landsat-ETM+", "Landsat-OLI"]
         if self.program not in programs:
@@ -174,6 +177,7 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         Returns
             xr.DataArray: A new DataArray with the indexes computed.
         """
+        self.__check_input(X)
         self._get_params(X)
 
         idx = spyndex.computeIndex(
