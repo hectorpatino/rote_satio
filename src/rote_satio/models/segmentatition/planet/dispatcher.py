@@ -1,12 +1,11 @@
 import os
-from pathlib import Path
 
-import pandas as pd
+from pathlib import Path
 from feature_engine.discretisation import EqualWidthDiscretiser
 from feature_engine.wrappers import SklearnTransformerWrapper
+from sklearn.cluster import HDBSCAN
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, RobustScaler
-from sklearn.cluster import HDBSCAN
 from umap import UMAP
 
 from rote_satio.models.utils.utils import save_pipeline, load_pipeline
@@ -38,17 +37,10 @@ class PlanetPipeline(Pipeline):
         return HDBSCAN(
             min_cluster_size=10,
             min_samples=50,
-            gen_min_span_tree=True,
-            prediction_data=True,
         )
 
     def fit(self, X, y=None, **params):
         preprocessing_pipeline = self._preprocessing_pipeline()
-        # save columns names to csv
-        pd.DataFrame(data = X.columns).to_csv(self.current_file.joinpath('columns.csv'))
-
-
-
         preprocessing_pipeline.fit(X)
         preprocessed = preprocessing_pipeline.transform(X)
 

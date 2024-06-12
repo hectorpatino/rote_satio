@@ -41,10 +41,11 @@ class SegmentsTransformer(BaseEstimator, TransformerMixin):
 
         """
         for band in X.band.values:
-            if not band.startswith('Zonal'):
-                try:
-                    band = int(band)
-                except ValueError:
+
+            try:
+                band = int(band)
+            except ValueError:
+                if not band.startswith('Zonal'):
                     segments = quickshift(
                         X.sel(band=band).data,
                         kernel_size=self.kernel_size,

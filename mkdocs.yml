@@ -6,8 +6,11 @@ nav:
   - API: api/module.md
   - Examples:
       - Segmentation:
-          - Custom: examples/kmeans.ipynb
-          - Pretrained: examples/segmentation.ipynb
+          - Custom: examples/models/kmeans.ipynb
+          - Pretrained: examples/models/segmentation.ipynb
+      - Utils:
+          - Geobia: examples/utils/geobia.ipynb
+          - Spyndex: examples/utils/spyndex.ipynb
   - Utils:
       - geobia: utils/geobia.md
       - spyndex: utils/spyndex.md
