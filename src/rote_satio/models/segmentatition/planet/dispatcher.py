@@ -6,8 +6,7 @@ from feature_engine.discretisation import EqualWidthDiscretiser
 from feature_engine.wrappers import SklearnTransformerWrapper
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, RobustScaler
-
-from hdbscan import HDBSCAN, approximate_predict
+from sklearn.cluster import HDBSCAN
 from umap import UMAP
 
 from rote_satio.models.utils.utils import save_pipeline, load_pipeline
@@ -69,8 +68,6 @@ class PlanetPipeline(Pipeline):
         current_file = Path(os.path.dirname(__file__))
 
         preprocessed_pipeline_location = current_file.joinpath(self.preprocessing_pipeline_name)
-        pretrain_hdbscan = current_file.joinpath(self.model_name)
 
         preprocessed_x = load_pipeline(preprocessed_pipeline_location).transform(X)
-        clustered_x, strengs = approximate_predict(load_pipeline(pretrain_hdbscan), preprocessed_x)
-        return clustered_x
+        return self._clustering_pipeline().fit_predict(preprocessed_x)
