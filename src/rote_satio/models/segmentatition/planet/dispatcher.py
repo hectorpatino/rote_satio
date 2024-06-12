@@ -1,14 +1,11 @@
 import os
-from pathlib import Path
 
-import pandas as pd
+from pathlib import Path
 from feature_engine.discretisation import EqualWidthDiscretiser
 from feature_engine.wrappers import SklearnTransformerWrapper
 from sklearn.cluster import HDBSCAN
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, RobustScaler
-
-
 from umap import UMAP
 
 from rote_satio.models.utils.utils import save_pipeline, load_pipeline
