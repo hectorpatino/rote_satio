@@ -42,6 +42,7 @@ ruff = "0.4.7"
 mkdocs-glightbox = "^0.4.0"
 mkdocs-jupyter = "^0.24.7"
 lxml = "^5.2.2"
+pytest-xdist = "^3.6.1"
 
 [tool.semantic_release]
 version_toml = [
