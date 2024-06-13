@@ -3,19 +3,21 @@ import rioxarray
 import xarray as xr
 import numpy as np
 
+
 @pytest.fixture(scope='module')
-def df_xarray():
+def test_array():
 
-
-    data = np.random.rand(4, 3, 2)
+    band = 4
+    y = 1000
+    data = np.random.rand(band, y, 2)
     coords = {
-        'band': np.arange(4),
-        'lat': np.arange(3),
-        'lon': np.arange(2)
+        'band': np.arange(band),
+        'y': np.arange(y),
+        'x': np.arange(2)
     }
-    dims = ('band', 'lat', 'lon')
+    dims = ('band', 'y', 'x')
     test_array = xr.DataArray(data, coords=coords, dims=dims)
-    test_array.attrs['long_name'] = [np.arange(4)]
+    test_array.attrs['long_name'] = [np.arange(band)]
     test_array.rio.write_crs('EPSG:4326', inplace=True)
     return test_array
 

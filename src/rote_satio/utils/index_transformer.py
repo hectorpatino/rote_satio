@@ -25,12 +25,9 @@ class IndexTransformer(BaseIOTransformer):
         """
         self.program = program
         self.indexes = self.get_indexes()
-        self.__check_program()
+        self._check_program(self.program)
 
-    def __check_program(self):
-        programs = ["Planet", "Landsat-TM", "MODIS", "Sentinel-2", "Landsat-ETM+", "Landsat-OLI"]
-        if self.program not in programs:
-            raise ValueError(f"Invalid image program {self.program}. Supported programs are {programs}.")
+
 
     def get_indexes(self):
         """
