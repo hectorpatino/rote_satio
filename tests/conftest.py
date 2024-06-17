@@ -8,12 +8,13 @@ import numpy as np
 def test_array():
 
     band = 4
-    y = 1000
-    data = np.random.rand(band, y, 2)
+    y = 20
+    x = 20
+    data = np.random.rand(band, y, x)
     coords = {
         'band': np.arange(band),
         'y': np.arange(y),
-        'x': np.arange(2)
+        'x': np.arange(x)
     }
     dims = ('band', 'y', 'x')
     test_array = xr.DataArray(data, coords=coords, dims=dims)
