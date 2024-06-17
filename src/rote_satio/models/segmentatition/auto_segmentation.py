@@ -49,8 +49,6 @@ class AutoSegmentation(BaseIOTransformer):
         self.model = model
         self._check_transformer_input()
 
-
-
     def predict(
             self,
             X: xr.DataArray = None,
@@ -72,13 +70,13 @@ class AutoSegmentation(BaseIOTransformer):
             raise ValueError("Image path or data must be provided.")
         self.data = self._generate_indexes()
         if self.generate_objects:
-            self._generete_segments()
+            self.data = self._generete_segments()
         df = parse_to_pandas(self.data)
         if self.model == 'basic':
             return self._train(values=range_values)
         else:
             pipeline = PlanetPipeline()
-            labels = pipeline.predict(df)
+            labels = pipeline.fit_predict(df)
         return self._convert_to_xarray(labels)
 
 
