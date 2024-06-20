@@ -1,13 +1,15 @@
 import warnings
 
 import numpy as np
-from sklearn.base import BaseEstimator, TransformerMixin
+
 from spyndex import spyndex
 from spyndex import constants
 import xarray as xr
 
+from rote_satio.utils.base_transformer import BaseIOTransformer
 
-class IndexTransformer(BaseEstimator, TransformerMixin):
+
+class IndexTransformer(BaseIOTransformer):
     def __init__(
             self,
             program: str = 'Planet',
@@ -23,12 +25,9 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         """
         self.program = program
         self.indexes = self.get_indexes()
-        self.__check_program()
+        self._check_program(self.program)
 
-    def __check_program(self):
-        programs = ["Planet", "Landsat-TM", "MODIS", "Sentinel-2", "Landsat-ETM+", "Landsat-OLI"]
-        if self.program not in programs:
-            raise ValueError(f"Invalid image program {self.program}. Supported programs are {programs}.")
+
 
     def get_indexes(self):
         """
@@ -174,6 +173,7 @@ class IndexTransformer(BaseEstimator, TransformerMixin):
         Returns
             xr.DataArray: A new DataArray with the indexes computed.
         """
+        self._check_input(X)
         self._get_params(X)
 
         idx = spyndex.computeIndex(

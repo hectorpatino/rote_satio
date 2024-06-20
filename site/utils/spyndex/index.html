@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../geobia/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Spyndex Transformer - rote-satio</title>
+        <title>spyndex - rote-satio</title>
       
     
     
@@ -113,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Spyndex Transformer
+              spyndex
             
           </span>
         </div>
@@ -384,7 +386,101 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/utils/geobia.md" class="md-nav__link">
+      <a href="../../examples/utils/geobia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geobia
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/utils/spyndex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spyndex
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geobia/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -402,10 +498,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../examples/utils/spyndex.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    spyndex
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -414,13 +530,76 @@
   
 
       </a>
-    </li>
-  
+      
+        
 
-              
-            
-          </ul>
-        </nav>
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.rote_satio.utils.index_transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      index_transformer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.rote_satio.utils.index_transformer.IndexTransformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      IndexTransformer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IndexTransformer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.rote_satio.utils.index_transformer.IndexTransformer.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.rote_satio.utils.index_transformer.IndexTransformer.get_indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_indexes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.rote_satio.utils.index_transformer.IndexTransformer.transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      transform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -560,14 +739,12 @@
 
     <div class="doc doc-contents ">
             <p class="doc doc-class-bases">
-              Bases: <code><span title="sklearn.base.BaseEstimator">BaseEstimator</span></code>, <code><span title="sklearn.base.TransformerMixin">TransformerMixin</span></code></p>
+              Bases: <code><span title="rote_satio.utils.base_transformer.BaseIOTransformer">BaseIOTransformer</span></code></p>
 
 
               <details class="quote">
                 <summary>Source code in <code>src\rote_satio\utils\index_transformer.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 12</span>
 <span class="normal"> 13</span>
 <span class="normal"> 14</span>
 <span class="normal"> 15</span>
@@ -832,7 +1009,7 @@
 <span class="normal">274</span>
 <span class="normal">275</span>
 <span class="normal">276</span>
-<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IndexTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IndexTransformer</span><span class="p">(</span><span class="n">BaseIOTransformer</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">program</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Planet&#39;</span><span class="p">,</span>
@@ -848,12 +1025,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">indexes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexes</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__check_program</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_program</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__check_program</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">programs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Planet&quot;</span><span class="p">,</span> <span class="s2">&quot;Landsat-TM&quot;</span><span class="p">,</span> <span class="s2">&quot;MODIS&quot;</span><span class="p">,</span> <span class="s2">&quot;Sentinel-2&quot;</span><span class="p">,</span> <span class="s2">&quot;Landsat-ETM+&quot;</span><span class="p">,</span> <span class="s2">&quot;Landsat-OLI&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">programs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid image program </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="si">}</span><span class="s2">. Supported programs are </span><span class="si">{</span><span class="n">programs</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
 
     <span class="k">def</span> <span class="nf">get_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -999,6 +1173,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">            xr.DataArray: A new DataArray with the indexes computed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_params</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
         <span class="n">idx</span> <span class="o">=</span> <span class="n">spyndex</span><span class="o">.</span><span class="n">computeIndex</span><span class="p">(</span>
@@ -1161,9 +1336,7 @@ for more information please visit <a href="https://spyndex.readthedocs.io/en/lat
 
             <details class="quote">
               <summary>Source code in <code>src\rote_satio\utils\index_transformer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -1176,7 +1349,9 @@ for more information please visit <a href="https://spyndex.readthedocs.io/en/lat
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">program</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Planet&#39;</span><span class="p">,</span>
 <span class="p">):</span>
@@ -1191,7 +1366,7 @@ for more information please visit <a href="https://spyndex.readthedocs.io/en/lat
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">indexes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexes</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__check_program</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_program</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1215,7 +1390,8 @@ Returns:
 
             <details class="quote">
               <summary>Source code in <code>src\rote_satio\utils\index_transformer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 33</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 32</span>
+<span class="normal"> 33</span>
 <span class="normal"> 34</span>
 <span class="normal"> 35</span>
 <span class="normal"> 36</span>
@@ -1348,8 +1524,7 @@ Returns:
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    It returns the indexes supported by the program of the program being used by `spyndex</span>
 <span class="sd">    Returns:</span>
@@ -1509,7 +1684,8 @@ Returns
 
             <details class="quote">
               <summary>Source code in <code>src\rote_satio\utils\index_transformer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">168</span>
+<span class="normal">169</span>
 <span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
@@ -1536,6 +1712,7 @@ Returns
 <span class="sd">    Returns</span>
 <span class="sd">        xr.DataArray: A new DataArray with the indexes computed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_input</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_get_params</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
     <span class="n">idx</span> <span class="o">=</span> <span class="n">spyndex</span><span class="o">.</span><span class="n">computeIndex</span><span class="p">(</span>

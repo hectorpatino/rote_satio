@@ -1,12 +1,12 @@
 import os
-from typing import Tuple
+import scipy
+import rioxarray
 
+import xarray as xr
 import numpy as np
 
-import scipy
-import xarray as xr
-import rioxarray
 from kneed import KneeLocator
+from typing import Tuple, Optional
 from sklearn.cluster import KMeans
 from sklearn.pipeline import Pipeline
 from feature_engine.discretisation import EqualWidthDiscretiser
@@ -16,16 +16,18 @@ from skimage.segmentation import quickshift
 from sklearn.preprocessing import MinMaxScaler, RobustScaler
 
 from rote_satio.models.segmentatition.planet.dispatcher import PlanetPipeline
+from rote_satio.utils.base_transformer import BaseIOTransformer
 from rote_satio.utils.geobia_transformer import SegmentsTransformer
 from rote_satio.utils.index_transformer import IndexTransformer
 from rote_satio.utils.utils import parse_to_pandas
 
 
-class AutoSegmentation():
+class AutoSegmentation(BaseIOTransformer):
     def __init__(
             self,
-            image_path: str,
             image_program: str,
+            model: str = 'basic',
+            image_path: Optional[str] = None,
             generate_objects: bool = True,
     ):
         """
@@ -38,32 +40,47 @@ class AutoSegmentation():
             self (AutoSegmentation): And AutoSegmentation object with the given image_path and image_program
                 that can be used to perform segmentation on the image.
         """
-        self._check_input(image_path, image_program)
         self.image_path = image_path
         self.image_program = image_program
         self.generate_objects = generate_objects
         self.umap_pipeline = None
         self.hdbscan_pipeline = None
+        # TODO qas
+        self.model = model
+        self._check_transformer_input()
 
-
-    def predict(self):
+    def predict(
+            self,
+            X: xr.DataArray = None,
+            range_values: Tuple[int, int] = (5, 50),
+    ) -> xr.DataArray:
         """
         Predicts the segmentation of the image. Using a pre-trained model.
         Returns:
             xr.DataArray: DataArray of the predicted labels.
 
         """
-        self._read_image()
-        self._generate_indexes()
+        if self.image_path is not None and X is not None:
+            raise ValueError("Image path and data cannot be None at the same time.")
+        elif self.image_path is None and X is not None:
+            self.data = X
+        elif self.image_path is not None:
+            self.data = self._read_image()
+        else:
+            raise ValueError("Image path or data must be provided.")
+        self.data = self._generate_indexes()
         if self.generate_objects:
-            self._generete_segments()
-        df = parse_to_pandas(self.image)
-        pipeline = PlanetPipeline()
-        labels = pipeline.predict(df)
+            self.data = self._generete_segments()
+        df = parse_to_pandas(self.data)
+        if self.model == 'basic':
+            return self._train(values=range_values)
+        else:
+            pipeline = PlanetPipeline()
+            labels = pipeline.fit_predict(df)
         return self._convert_to_xarray(labels)
 
 
-    def train(self, values: Tuple[int, int] = (5, 50)):
+    def _train(self, values):
         """
         Trains a models to segment the image. It uses kmeans to segment the image and uses
         the elbow method to find the best number of clusters.
@@ -74,11 +91,7 @@ class AutoSegmentation():
             self (AutoSegmentation): DataArray of the predicted labels.
 
         """
-        self._read_image()
-        self._generate_indexes()
-        if self.generate_objects:
-            self._generete_segments()
-        df = parse_to_pandas(self.image)
+        df = parse_to_pandas(self.data)
         number_clusters = np.arange(values[0], values[1])
         pipeline = Pipeline([
             ('scaler', SklearnTransformerWrapper(transformer=MinMaxScaler())),
@@ -109,7 +122,7 @@ class AutoSegmentation():
 
 
     def _convert_to_xarray(self, labels):
-        labels = labels.reshape(self.image.shape[1], self.image.shape[2])
+        labels = labels.reshape(self.data.shape[1], self.data.shape[2])
         segments = quickshift(
             labels,
             kernel_size=1,
@@ -130,31 +143,28 @@ class AutoSegmentation():
             dims=['band', 'y', 'x'],
             coords={
                 'band': ['labels'],
-                'y': self.image.y.data,
-                'x': self.image.x.data,
+                'y': self.data.y.data,
+                'x': self.data.x.data,
             },
             attrs={'long_name': ['labels']}
         )
-        labels = labels.rio.write_crs(self.image.rio.crs)
+        labels = labels.rio.write_crs(self.data.rio.crs)
         return labels
 
-    def _check_input(self, image_path: str, image_program: str):
+    def _check_transformer_input(self):
         """
         Args:
-            image_path: Path to the image that needs to be segmented.
-            image_program: Program of the sensor of the image.
 
         Returns:
             None
         """
-        if not os.path.exists(image_path):
-            raise FileNotFoundError(f"Image not found at {image_path}")
+        if self.image_path is not None:
+            if not os.path.exists(self.image_path):
+                raise FileNotFoundError(f"Image not found at {self.image_path}")
 
-        if image_program not in ["Planet"]:
-            raise ValueError(f"Invalid image program {image_program}. Supported programs are ['Planet']")
-
-        if image_program is None:
-            raise ValueError("Image program cannot be None")
+        elif self.image_program not in ['Planet', 'Sentinel']:
+            raise ValueError("Program must be either Planet or Sentinel.")
+        self._check_program(self.image_program)
 
 
     def _read_image(self) -> xr.Dataset:
@@ -166,7 +176,7 @@ class AutoSegmentation():
         Returns:
             xr.DataArray: DataArray of the image read from the image_path.
         """
-        self.image = rioxarray.open_rasterio(self.image_path, engine='rasterio')
+        return rioxarray.open_rasterio(self.image_path, engine='rasterio')
 
 
 
@@ -180,7 +190,7 @@ class AutoSegmentation():
             None
         """
         index_transformer = IndexTransformer(program=self.image_program)
-        self.image = index_transformer.transform(self.image)
+        return index_transformer.transform(self.data)
 
 
     def _generete_segments(self):
@@ -193,7 +203,7 @@ class AutoSegmentation():
             None
         """
         segments_transformer = SegmentsTransformer()
-        self.image = segments_transformer.transform(self.image)
+        return segments_transformer.transform(self.data)
 
 
 

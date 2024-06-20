@@ -35,4 +35,5 @@ jobs:
           files: ./coverage.xml   # coverage report
 
       - name: Build documentation
+
         run: poetry run mkdocs build
