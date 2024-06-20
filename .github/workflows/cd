@@ -1,0 +1,44 @@
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+
+    - name: Install poetry
+      uses: snok/install-poetry@v1
+
+    - name: build package
+      run: poetry build
+
+    - name: config testpypi
+      run: poetry config repositories.testpypi https://test.pypi.org/legacy/
+
+    - name: Publish to TestPyPI
+      id: test_pypi
+      run: poetry publish -r testpypi -u __token__ -p ${{ secrets.TEST_PYPI_API_TOKEN }}
+      
+    - name: Test install from TestPyPI
+      id: test_install
+      run: |
+            pip install \
+            --index-url https://test.pypi.org/simple/ \
+            --extra-index-url https://pypi.org/simple \
+            rote_satio
+    - name: Publish to PyPI
+      id: pypi
+      run: poetry publish -u __token__ -p ${{ secrets.PYPI_API_TOKEN }}
